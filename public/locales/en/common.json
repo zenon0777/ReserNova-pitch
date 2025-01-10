@@ -1,0 +1,40 @@
+{
+    "language": "Language",
+    "french": "French",
+    "english": "English",
+    "pitchDeck": {
+      "fullScreen": "Full Screen",
+      "exitFullScreen": "Exit Full Screen",
+      "previous": "Previous",
+      "next": "Next",
+      "slide": "Slide",
+      "of": "of"
+    },
+    "slides": {
+      "reserNova": {
+        "title": "ReserNova",
+        "subtitle": "Innovation in Digital Reservation in Morocco",
+        "vision": "Vision 2024-2025",
+        "context": "In a context of economic growth of +2.8% in Q3 2024, we are transforming the reservation experience in Morocco by unifying the tourism ecosystem and local services.",
+        "tourists": "Tourists",
+        "projection": "2024 Projection",
+        "growth": "Growth Excluding Agriculture",
+        "secondarySector": "Secondary Sector"
+      },
+      "marketAnalysis": {
+        "title": "2024 Market Analysis",
+        "subtitle": "Current Economic Trends",
+        "sectorGrowth": "Sector Growth Q3 2024",
+        "services": "Services",
+        "construction": "Construction",
+        "industries": "Industries",
+        "tourism": "Tourism",
+        "keyOpportunities": "Key Opportunities",
+        "servicesGrowth": "Services growth: +3.4%",
+        "constructionGrowth": "Construction: +4.8%",
+        "manufacturingSector": "Manufacturing sector on the rise",
+        "tourismIndicators": "Tourism Indicators"
+      }
+    }
+  }
+  

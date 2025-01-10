@@ -1,0 +1,41 @@
+{
+    "language": "Langue",
+    "french": "Français",
+    "english": "Anglais",
+    "pitchDeck": {
+      "fullScreen": "Plein Écran",
+      "exitFullScreen": "Quitter Plein Écran",
+      "previous": "Précédent",
+      "next": "Suivant",
+      "slide": "Diapositive",
+      "of": "sur"
+    },
+    "slides": {
+      "reserNova": {
+        "title": "ReserNova",
+        "subtitle": "Innovation dans la Réservation Digitale au Maroc",
+        "vision": "Vision 2024-2025",
+        "context": "Dans un contexte de croissance économique de +2.8% au T3 2024, nous transformons l'expérience de réservation au Maroc en unifiant l'écosystème touristique et les services locaux.",
+        "tourists": "Touristes",
+        "projection": "Projection 2024",
+        "growth": "Croissance Hors Agriculture",
+        "secondarySector": "Secteur Secondaire"
+      },
+      "marketAnalysis": {
+        "title": "Analyse du Marché 2024",
+        "subtitle": "Tendances Économiques Actuelles",
+        "sectorGrowth": "Croissance Sectorielle T3 2024",
+        "services": "Services",
+        "construction": "Construction",
+        "industries": "Industries",
+        "tourism": "Tourisme",
+        "keyOpportunities": "Opportunités Clés",
+        "servicesGrowth": "Croissance services: +3.4%",
+        "constructionGrowth": "Construction: +4.8%",
+        "manufacturingSector": "Secteur manufacturier en hausse",
+        "tourismIndicators": "Indicateurs Touristiques"
+      }
+    }
+  }
+  
+  
