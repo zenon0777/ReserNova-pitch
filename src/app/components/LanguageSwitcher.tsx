@@ -1,31 +1,27 @@
 'use client';
 
-import { useTranslation } from 'next-i18next';
-import Link from 'next/link';
+import { useLocale } from 'next-intl';
+import { Link } from 'next-intl';
 
-const LanguageSwitcher = () => {
-    const { t, i18n } = useTranslation();
+export default function LanguageSwitcher() {
+  const locale = useLocale();
 
-    return (
-        <div>
-            <label htmlFor="language-select">{t('language')}: </label>
-            <select
-                id="language-select"
-                value={i18n.language}
-            >
-                <option value="en">
-                    <Link href="/en">
-                        {t('english')}
-                    </Link>
-                </option>
-                <option value="fr">
-                    <Link href="/fr">
-                        {t('french')}
-                    </Link>
-                </option>
-            </select>
-        </div>
-    );
-};
-
-export default LanguageSwitcher;
+  return (
+    <div className="flex gap-2">
+      <Link 
+        href="/" 
+        locale="en"
+        className={locale === 'en' ? 'font-bold' : ''}
+      >
+        English
+      </Link>
+      <Link 
+        href="/" 
+        locale="fr"
+        className={locale === 'fr' ? 'font-bold' : ''}
+      >
+        Français
+      </Link>
+    </div>
+  );
+}

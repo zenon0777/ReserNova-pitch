@@ -4,9 +4,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Activity, Building2, ChevronLeft, ChevronRight, DollarSign, Hotel, Map, Maximize2, Minimize2, Rocket, Sparkles, Target, TrendingUp, Trophy, Users, Users2, Utensils } from 'lucide-react';
 import React, { useState } from 'react';
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { Button } from './components/ui/Button';
-import { Card, CardContent, CardHeader, CardTitle } from './components/ui/Card';
-import LanguageSwitcher from './components/LanguageSwitcher';
+import { Button } from '../components/ui/Button';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 import { useTranslation } from 'next-i18next';
 
 const slides = [
