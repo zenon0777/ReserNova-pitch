@@ -4,13 +4,22 @@ import { locales } from '@/i18n';
 import LanguageSwitcher from '../components/LanguageSwitcher';
 
 // Note the async function and proper typing
-export default async function LocaleLayout({
-    children,
-    params: { locale },
-}: {
-    children: ReactNode;
-    params: { locale: string };
-}) {
+export default async function LocaleLayout(
+    props: {
+        children: ReactNode;
+        params: Promise<{ locale: string }>;
+    }
+) {
+    const params = await props.params;
+
+    const {
+        locale
+    } = params;
+
+    const {
+        children
+    } = props;
+
     // Validate that the incoming locale is supported
     if (!locales.includes(locale as 'en' | 'fr')) {
         throw new Error('Invalid locale');
