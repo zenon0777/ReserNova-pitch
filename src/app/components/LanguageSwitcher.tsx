@@ -1,7 +1,7 @@
-"use client"; // Mark this as a Client Component
+"use client";
 
-import { useRouter } from "next/navigation";
-import { usePathname } from "next/navigation";
+import { LanguagesIcon } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function LanguageSwitcher() {
   const router = useRouter();
@@ -9,8 +9,8 @@ export default function LanguageSwitcher() {
 
   // Supported languages
   const languages = [
-    { code: "en", name: "English" },
-    { code: "fr", name: "Français" },
+    { code: "en", name: "English", icon: <LanguagesIcon /> },
+    { code: "fr", name: "Français", icon: <LanguagesIcon /> },
   ];
 
   // Extract the current locale from the pathname
@@ -24,7 +24,7 @@ export default function LanguageSwitcher() {
   };
 
   return (
-    <div>
+    <div className="flex gap-4">
       {languages.map((lang) => (
         <button
           key={lang.code}
@@ -32,9 +32,13 @@ export default function LanguageSwitcher() {
           style={{
             fontWeight: currentLocale === lang.code ? "bold" : "normal",
             marginRight: "8px",
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
           }}
         >
-          {lang.name}
+          <span>{lang.icon}</span> {/* Display the icon */}
+          <span>{lang.name}</span> {/* Display the language name */}
         </button>
       ))}
     </div>

@@ -109,7 +109,7 @@
     },
     "investmentOpportunity": {
       "title": "Investment Opportunity",
-      "subtitle": "A Universal Booking Platform for the Moroccan Market",
+      "subtitle": "MVP Phase - Multi-Service Platform",
       "mvpPhase": "MVP Phase - Multi-Service Platform",
       "mvpDescription": "ReserNova unifies the Moroccan tourism ecosystem through an innovative mobile and web platform, offering a complete solution for service bookings.",
       "mainServices": "Main Services",
@@ -122,6 +122,7 @@
       "wellness": "Wellness",
       "wellnessDescription": "Spas, Hammams, Beauty Centers",
       "revenueModel": "Revenue Model",
+      "commissions": "Commissions",
       "commissionsDescription": "On each booking made",
       "premiumSubscriptions": "Premium Subscriptions",
       "premiumSubscriptionsDescription": "Advanced features for providers",

@@ -31,7 +31,6 @@ export default async function LocaleLayout({
             <div className='flex justify-end p-4 mb-4'>
                 <LanguageSwitcher />
             </div>
-            <LanguageSwitcher />
             {children}
         </NextIntlClientProvider>
     );

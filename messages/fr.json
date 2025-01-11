@@ -109,7 +109,7 @@
     },
     "investmentOpportunity": {
       "title": "Opportunité d'Investissement",
-      "subtitle": "Une Plateforme Universelle de Réservation pour le Marché Marocain",
+      "subtitle": "Phase MVP - Plateforme Multi-Services",
       "mvpPhase": "Phase MVP - Plateforme Multi-Services",
       "mvpDescription": "ReserNova unifie l'écosystème touristique marocain à travers une plateforme mobile et web innovante, offrant une solution complète pour les réservations de services.",
       "mainServices": "Services Principaux",
@@ -122,6 +122,7 @@
       "wellness": "Bien-être",
       "wellnessDescription": "Spas, Hammams, Centres de Beauté",
       "revenueModel": "Modèle de Revenus",
+      "commissions": "Commissions",
       "commissionsDescription": "Sur chaque réservation effectuée",
       "premiumSubscriptions": "Abonnements Premium",
       "premiumSubscriptionsDescription": "Fonctionnalités avancées pour prestataires",
