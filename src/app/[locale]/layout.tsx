@@ -1,37 +1,38 @@
-import type { Metadata } from "next";
-import { Geist, Azeret_Mono as Geist_Mono } from 'next/font/google';
-import "./globals.css";
+import { ReactNode } from 'react';
+import { NextIntlClientProvider } from 'next-intl';
+import { locales } from '@/i18n';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+// Note the async function and proper typing
+export default async function LocaleLayout({
+    children,
+    params: { locale },
+}: {
+    children: ReactNode;
+    params: { locale: string };
+}) {
+    // Validate that the incoming locale is supported
+    if (!locales.includes(locale as 'en' | 'fr')) {
+        throw new Error('Invalid locale');
+    }
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+    // Load messages for the current locale
+    let messages;
+    try {
+        messages = (await import(`../../../messages/${locale}.json`)).default;
+    } catch (error) {
+        throw new Error(`Failed to load messages for locale: ${locale}`);
+        console.log(error);
+    }
 
-export const metadata: Metadata = {
-  title: "ReserNova - Pitch Deck",
-  description: "La Plateforme Universelle de Réservation au Maroc",
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="fr">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-gradient-to-b from-gray-50 to-white min-h-screen`}
-      >
-        <div className="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8">
-          {children}
-        </div>
-      </body>
-    </html>
-  );
+    return (
+        <NextIntlClientProvider locale={locale} messages={messages}>
+            {/* language switcher */}
+            <div className='flex justify-end p-4 mb-4'>
+                <LanguageSwitcher />
+            </div>
+            <LanguageSwitcher />
+            {children}
+        </NextIntlClientProvider>
+    );
 }
-
