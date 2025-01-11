@@ -9,8 +9,6 @@ import {
   DollarSign,
   Hotel,
   Map,
-  Maximize2,
-  Minimize2,
   Rocket,
   Sparkles,
   Target,
