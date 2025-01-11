@@ -2,17 +2,23 @@
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { Activity, Building2, ChevronLeft, ChevronRight, DollarSign, Hotel, Map, Maximize2, Minimize2, Rocket, Sparkles, Target, TrendingUp, Trophy, Users, Users2, Utensils } from 'lucide-react';
-import React, { useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { JSX, useState } from 'react';
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { Button } from '../components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
-import { useTranslations } from 'next-intl';
+
+interface slider {
+  title: string,
+  subtitle: string,
+  content: (t : (scope: string) => string) => JSX.Element
+}
 
 const slides = [
   {
     title: "slides.reserNova.title",
     subtitle: "slides.reserNova.subtitle",
-    content: (t) => (
+    content: (t : (scope: string) => string) => (
       <div className="space-y-8">
         <div className="bg-gradient-to-r from-blue-100 to-purple-100 p-6 rounded-xl shadow-md">
           <h2 className="text-3xl font-bold mb-4 text-blue-800">{t('slides.reserNova.vision')}</h2>
@@ -52,7 +58,7 @@ const slides = [
   {
     title: "slides.marketAnalysis.title",
     subtitle: "slides.marketAnalysis.subtitle",
-    content: (t) => (
+    content: (t : (scope: string) => string) => (
       <div className="space-y-8">
         <Card className="bg-gradient-to-r from-gray-50 to-blue-50 shadow-md">
           <CardContent className="p-6">
@@ -124,7 +130,7 @@ const slides = [
   {
     title: "slides.solutionReserNova.title",
     subtitle: "slides.solutionReserNova.subtitle",
-    content: (t) => (
+    content: (t : (scope: string) => string) => (
       <div className="space-y-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Card className="bg-gradient-to-br from-blue-100 to-indigo-100 shadow-md">
@@ -181,7 +187,7 @@ const slides = [
   {
     title: "slides.marketOpportunity.title",
     subtitle: "slides.marketOpportunity.subtitle",
-    content: (t) => (
+    content: (t : (scope: string) => string) => (
       <div className="space-y-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Card className="bg-gradient-to-br from-blue-100 to-indigo-100 shadow-md">
@@ -270,7 +276,7 @@ const slides = [
   {
     title: "slides.competitiveAdvantage.title",
     subtitle: "slides.competitiveAdvantage.subtitle",
-    content: (t) => (
+    content: (t : (scope: string) => string) => (
       <div className="space-y-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card className="bg-gradient-to-br from-blue-100 to-blue-200 shadow-md">
@@ -349,7 +355,7 @@ const slides = [
   {
     title: "slides.financialModel.title",
     subtitle: "slides.financialModel.subtitle",
-    content: (t) => (
+    content: (t : (scope: string) => string) => (
       <div className="space-y-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Card className="bg-gradient-to-r from-gray-50 to-blue-50 shadow-md">
@@ -432,7 +438,7 @@ const slides = [
   {
     title: "slides.investmentOpportunity.title",
     subtitle: "slides.investmentOpportunity.subtitle",
-    content: (t) => (
+    content: (t : (scope: string) => string) => (
       <div className="space-y-8">
         <div className="bg-gradient-to-r from-blue-100 to-purple-100 p-6 rounded-xl shadow-md">
           <h2 className="text-3xl font-bold mb-4 text-blue-800">{t('slides.investmentOpportunity.mvpPhase')}</h2>
@@ -572,7 +578,7 @@ const PitchDeck = () => {
     <div className={`min-h-screen bg-gradient-to-b from-blue-50 via-purple-50 to-pink-50 p-4 sm:p-8 ${isFullScreen ? 'fixed inset-0 z-50' : ''}`}>
       <div className="max-w-7xl mx-auto">
         <nav className="flex justify-center space-x-2 sm:space-x-4 mb-8 flex-wrap">
-          {slides.map((slide, index) => (
+          {slides.map((slide: slider, index: number) => (
             <Button
               key={index}
               onClick={() => setCurrentSlide(index)}
