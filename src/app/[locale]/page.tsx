@@ -723,6 +723,9 @@ const slides = [
                 <Tooltip formatter={(value) => `${value}%`} />
               </PieChart>
             </ResponsiveContainer>
+            <p className="text-purple-800 mt-4 text-center font-semibold">
+              Total Funding Request: 100000 DH
+            </p>
           </CardContent>
         </Card>
 
@@ -734,9 +737,9 @@ const slides = [
               </h3>
               <ul className="space-y-2 text-indigo-700">
                 <li>• Accelerate MVP development</li>
+                <li>• Launch targeted market campaigns</li>
                 <li>• Conduct comprehensive market research</li>
-                <li>• Implement customer acquisition initiatives</li>
-                <li>• Expand the team strategically</li>
+                <li>• Expand team in operations & marketing</li>
               </ul>
             </CardContent>
           </Card>
@@ -748,8 +751,8 @@ const slides = [
               </h3>
               <p className="text-emerald-700">
                 Our goal is to revolutionize the fragmented service reservation
-                market globally, delivering value for both consumers and service
-                providers through our seamless, AI-driven platform.
+                market globally by delivering a seamless, AI-driven platform
+                that maximizes value for both consumers and service providers.
               </p>
             </CardContent>
           </Card>
