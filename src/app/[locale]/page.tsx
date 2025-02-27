@@ -1,872 +1,518 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
-import {
-  Activity,
-  Building2,
-  ChevronLeft,
-  ChevronRight,
-  DollarSign,
-  Hotel,
-  Map,
-  Rocket,
-  Sparkles,
-  Target,
-  TrendingUp,
-  Trophy,
-  Users,
-  Users2,
-  Utensils,
-} from "lucide-react";
-import { useTranslations } from "next-intl";
-import { JSX, useState } from "react";
-import {
-  Area,
-  AreaChart,
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Cell,
-  Legend,
-  Line,
-  LineChart,
-  Pie,
-  PieChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
-import { Button } from "../components/ui/Button";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "../components/ui/Card";
-
-interface slider {
-  title: string;
-  subtitle: string;
-  content: (t: (scope: string) => string) => JSX.Element;
-}
+} from "@/app/components/ui/Card";
+import { Button } from "@/app/components/ui/Button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+} from "recharts";
 
 const slides = [
   {
-    title: "slides.reserNova.title",
-    subtitle: "slides.reserNova.subtitle",
-    content: (t: (scope: string) => string) => (
+    id: "title",
+    title: "ReserNova",
+    subtitle: "Smart Reservations, Simplified",
+    content: () => (
       <div className="space-y-8">
-        <div className="bg-gradient-to-r from-blue-100 to-purple-100 p-6 rounded-xl shadow-md">
-          <h2 className="text-3xl font-bold mb-4 text-blue-800">
-            {t("slides.reserNova.vision")}
-          </h2>
+        <div className="bg-gradient-to-r from-blue-100 to-purple-100 p-8 rounded-xl shadow-md">
+          <h2 className="text-4xl font-bold mb-4 text-blue-800">ReserNova</h2>
           <p className="text-xl text-gray-700 leading-relaxed">
-            {t("slides.reserNova.context")}
+            A unified digital platform revolutionizing the way people make
+            reservations across multiple sectors.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 hover:shadow-lg transition-shadow duration-300">
-            <CardContent className="p-6">
-              <Users className="h-12 w-12 text-blue-600 mb-4" />
-              <h3 className="text-2xl font-bold text-blue-800 mb-2">
-                12M+ {t("slides.reserNova.tourists")}
-              </h3>
-              <p className="text-blue-600">
-                {t("slides.reserNova.projection")}
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gradient-to-br from-green-50 to-green-100 hover:shadow-lg transition-shadow duration-300">
-            <CardContent className="p-6">
-              <TrendingUp className="h-12 w-12 text-green-600 mb-4" />
-              <h3 className="text-2xl font-bold text-green-800 mb-2">+3.6%</h3>
-              <p className="text-green-600">{t("slides.reserNova.growth")}</p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gradient-to-br from-purple-50 to-purple-100 hover:shadow-lg transition-shadow duration-300">
-            <CardContent className="p-6">
-              <Activity className="h-12 w-12 text-purple-600 mb-4" />
-              <h3 className="text-2xl font-bold text-purple-800 mb-2">+4.4%</h3>
-              <p className="text-purple-600">
-                {t("slides.reserNova.secondarySector")}
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    ),
-  },
-  {
-    title: "slides.marketAnalysis.title",
-    subtitle: "slides.marketAnalysis.subtitle",
-    content: (t: (scope: string) => string) => (
-      <div className="space-y-8">
-        <Card className="bg-gradient-to-r from-gray-50 to-blue-50 shadow-md">
-          <CardContent className="p-6">
-            <h3 className="text-2xl font-bold mb-6 text-blue-800">
-              {t("slides.marketAnalysis.sectorGrowth")}
-            </h3>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart
-                data={[
-                  {
-                    secteur: t("slides.marketAnalysis.services"),
-                    croissance: 3.4,
-                  },
-                  {
-                    secteur: t("slides.marketAnalysis.construction"),
-                    croissance: 4.8,
-                  },
-                  {
-                    secteur: t("slides.marketAnalysis.industries"),
-                    croissance: 4.4,
-                  },
-                  {
-                    secteur: t("slides.marketAnalysis.tourism"),
-                    croissance: 5.2,
-                  },
-                ]}
-              >
-                <CartesianGrid strokeDasharray="3 3" stroke="#ccc" />
-                <XAxis dataKey="secteur" stroke="#4a5568" />
-                <YAxis stroke="#4a5568" />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: "#f7fafc",
-                    border: "1px solid #e2e8f0",
-                  }}
-                />
-                <Bar dataKey="croissance" fill="#4F46E5" />
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 shadow-md">
-            <CardContent className="p-6">
-              <h3 className="text-xl font-bold mb-4 text-blue-800">
-                {t("slides.marketAnalysis.keyOpportunities")}
-              </h3>
-              <ul className="space-y-3">
-                <li className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-blue-600"></div>
-                  <span className="text-blue-700">
-                    {t("slides.marketAnalysis.servicesGrowth")}
-                  </span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-blue-600"></div>
-                  <span className="text-blue-700">
-                    {t("slides.marketAnalysis.constructionGrowth")}
-                  </span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-blue-600"></div>
-                  <span className="text-blue-700">
-                    {t("slides.marketAnalysis.manufacturingSector")}
-                  </span>
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gradient-to-br from-purple-50 to-purple-100 shadow-md">
-            <CardContent className="p-6">
-              <h3 className="text-xl font-bold mb-4 text-purple-800">
-                {t("slides.marketAnalysis.tourismIndicators")}
-              </h3>
-              <ResponsiveContainer width="100%" height={200}>
-                <AreaChart
-                  data={[
-                    { mois: "Jan", touristes: 800 },
-                    { mois: "Fév", touristes: 900 },
-                    { mois: "Mar", touristes: 1000 },
-                    { mois: "Avr", touristes: 1100 },
-                  ]}
-                >
-                  <Area
-                    type="monotone"
-                    dataKey="touristes"
-                    fill="#8B5CF6"
-                    stroke="#7C3AED"
-                  />
-                  <XAxis dataKey="mois" stroke="#4a5568" />
-                  <YAxis stroke="#4a5568" />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: "#f7fafc",
-                      border: "1px solid #e2e8f0",
-                    }}
-                  />
-                </AreaChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    ),
-  },
-  {
-    title: "slides.solutionReserNova.title",
-    subtitle: "slides.solutionReserNova.subtitle",
-    content: (t: (scope: string) => string) => (
-      <div className="space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card className="bg-gradient-to-br from-blue-100 to-indigo-100 shadow-md">
-            <CardContent className="p-6">
-              <h3 className="text-2xl font-bold mb-4 text-blue-800">
-                {t("slides.solutionReserNova.userBenefits")}
-              </h3>
-              <ul className="space-y-2">
-                <li className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-blue-600"></div>
-                  <span className="text-blue-700">
-                    {t("slides.solutionReserNova.userBenefit1")}
-                  </span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-blue-600"></div>
-                  <span className="text-blue-700">
-                    {t("slides.solutionReserNova.userBenefit2")}
-                  </span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-blue-600"></div>
-                  <span className="text-blue-700">
-                    {t("slides.solutionReserNova.userBenefit3")}
-                  </span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-blue-600"></div>
-                  <span className="text-blue-700">
-                    {t("slides.solutionReserNova.userBenefit4")}
-                  </span>
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gradient-to-br from-green-100 to-emerald-100 shadow-md">
-            <CardContent className="p-6">
-              <h3 className="text-2xl font-bold mb-4 text-green-800">
-                {t("slides.solutionReserNova.providerBenefits")}
-              </h3>
-              <ul className="space-y-2">
-                <li className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-green-600"></div>
-                  <span className="text-green-700">
-                    {t("slides.solutionReserNova.providerBenefit1")}
-                  </span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-green-600"></div>
-                  <span className="text-green-700">
-                    {t("slides.solutionReserNova.providerBenefit2")}
-                  </span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-green-600"></div>
-                  <span className="text-green-700">
-                    {t("slides.solutionReserNova.providerBenefit3")}
-                  </span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-green-600"></div>
-                  <span className="text-green-700">
-                    {t("slides.solutionReserNova.providerBenefit4")}
-                  </span>
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    ),
-  },
-  {
-    title: "slides.marketOpportunity.title",
-    subtitle: "slides.marketOpportunity.subtitle",
-    content: (t: (scope: string) => string) => (
-      <div className="space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card className="bg-gradient-to-br from-blue-100 to-indigo-100 shadow-md">
-            <CardContent className="p-6">
-              <h3 className="text-2xl font-bold mb-4 text-blue-800">
-                {t("slides.marketOpportunity.addressableMarket")}
-              </h3>
-              <ResponsiveContainer width="100%" height={200}>
-                <PieChart>
-                  <Pie
-                    data={[
-                      {
-                        name: "TAM",
-                        value: 50,
-                        description: t("slides.marketOpportunity.tam"),
-                      },
-                      {
-                        name: "SAM",
-                        value: 30,
-                        description: t("slides.marketOpportunity.sam"),
-                      },
-                      {
-                        name: "SOM",
-                        value: 20,
-                        description: t("slides.marketOpportunity.som"),
-                      },
-                    ]}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={40}
-                    outerRadius={80}
-                    fill="#8884d8"
-                    dataKey="value"
-                  >
-                    {["#4F46E5", "#10B981", "#8B5CF6"].map((color, index) => (
-                      <Cell key={`cell-${index}`} fill={color} />
-                    ))}
-                  </Pie>
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: "#f7fafc",
-                      border: "1px solid #e2e8f0",
-                    }}
-                  />
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gradient-to-br from-gray-50 to-blue-50 shadow-md">
-            <CardContent className="p-6">
-              <h3 className="text-2xl font-bold mb-4 text-blue-800">
-                {t("slides.marketOpportunity.marketPotential")}
-              </h3>
-              <ul className="space-y-4">
-                <li className="flex items-start gap-3">
-                  <Target className="h-6 w-6 text-blue-600 mt-1" />
-                  <div>
-                    <span className="font-bold text-blue-700">TAM:</span> 50B
-                    MAD
-                    <p className="text-sm text-blue-600">
-                      {t("slides.marketOpportunity.tam")}
-                    </p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Users2 className="h-6 w-6 text-green-600 mt-1" />
-                  <div>
-                    <span className="font-bold text-green-700">SAM:</span> 30B
-                    MAD
-                    <p className="text-sm text-green-600">
-                      {t("slides.marketOpportunity.sam")}
-                    </p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Rocket className="h-6 w-6 text-purple-600 mt-1" />
-                  <div>
-                    <span className="font-bold text-purple-700">SOM:</span> 20B
-                    MAD
-                    <p className="text-sm text-purple-600">
-                      {t("slides.marketOpportunity.som")}
-                    </p>
-                  </div>
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-        </div>
-
-        <Card className="bg-gradient-to-r from-purple-100 to-pink-100 shadow-md">
-          <CardContent className="p-6">
-            <h3 className="text-2xl font-bold mb-6 text-purple-800">
-              {t("slides.marketOpportunity.marketGrowth")}
-            </h3>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart
-                data={[
-                  { year: "2024", market: 50 },
-                  { year: "2025", market: 65 },
-                  { year: "2026", market: 85 },
-                  { year: "2027", market: 110 },
-                ]}
-              >
-                <CartesianGrid strokeDasharray="3 3" stroke="#ccc" />
-                <XAxis dataKey="year" stroke="#4a5568" />
-                <YAxis
-                  label={{
-                    value: "Milliards MAD",
-                    angle: -90,
-                    position: "insideLeft",
-                  }}
-                  stroke="#4a5568"
-                />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: "#f7fafc",
-                    border: "1px solid #e2e8f0",
-                  }}
-                />
-                <Line
-                  type="monotone"
-                  dataKey="market"
-                  stroke="#8B5CF6"
-                  strokeWidth={2}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-      </div>
-    ),
-  },
-  {
-    title: "slides.competitiveAdvantage.title",
-    subtitle: "slides.competitiveAdvantage.subtitle",
-    content: (t: (scope: string) => string) => (
-      <div className="space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="bg-gradient-to-br from-blue-100 to-blue-200 shadow-md">
-            <CardContent className="p-6">
-              <Trophy className="h-12 w-12 text-blue-600 mb-4" />
-              <h3 className="text-xl font-bold mb-3 text-blue-800">
-                {t("slides.competitiveAdvantage.techInnovation")}
-              </h3>
-              <ul className="space-y-2 text-blue-700">
-                <li>• {t("slides.competitiveAdvantage.techInnovation1")}</li>
-                <li>• {t("slides.competitiveAdvantage.techInnovation2")}</li>
-                <li>• {t("slides.competitiveAdvantage.techInnovation3")}</li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gradient-to-br from-green-100 to-green-200 shadow-md">
-            <CardContent className="p-6">
-              <Building2 className="h-12 w-12 text-green-600 mb-4" />
-              <h3 className="text-xl font-bold mb-3 text-green-800">
-                {t("slides.competitiveAdvantage.localPartnerships")}
-              </h3>
-              <ul className="space-y-2 text-green-700">
-                <li>• {t("slides.competitiveAdvantage.localPartnerships1")}</li>
-                <li>• {t("slides.competitiveAdvantage.localPartnerships2")}</li>
-                <li>• {t("slides.competitiveAdvantage.localPartnerships3")}</li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gradient-to-br from-purple-100 to-purple-200 shadow-md">
-            <CardContent className="p-6">
-              <Users className="h-12 w-12 text-purple-600 mb-4" />
-              <h3 className="text-xl font-bold mb-3 text-purple-800">
-                {t("slides.competitiveAdvantage.clientExperience")}
-              </h3>
-              <ul className="space-y-2 text-purple-700">
-                <li>• {t("slides.competitiveAdvantage.clientExperience1")}</li>
-                <li>• {t("slides.competitiveAdvantage.clientExperience2")}</li>
-                <li>• {t("slides.competitiveAdvantage.clientExperience3")}</li>
-              </ul>
-            </CardContent>
-          </Card>
-        </div>
-
-        <Card className="bg-gradient-to-r from-gray-50 to-blue-50 shadow-md">
-          <CardContent className="p-6">
-            <h3 className="text-2xl font-bold mb-6 text-blue-800">
-              {t("slides.competitiveAdvantage.competitiveAnalysis")}
-            </h3>
-            <div className="overflow-x-auto">
-              <table className="min-w-full">
-                <thead>
-                  <tr className="bg-blue-100">
-                    <th className="p-4 text-left text-blue-800">
-                      {t("slides.competitiveAdvantage.features")}
-                    </th>
-                    <th className="p-4 text-center text-blue-800">ReserNova</th>
-                    <th className="p-4 text-center text-blue-800">
-                      Concurrent A
-                    </th>
-                    <th className="p-4 text-center text-blue-800">
-                      Concurrent B
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[
-                    {
-                      feature: t(
-                        "slides.competitiveAdvantage.multiServiceBooking"
-                      ),
-                      us: "✓",
-                      a: "×",
-                      b: "×",
-                    },
-                    {
-                      feature: t("slides.competitiveAdvantage.localPayment"),
-                      us: "✓",
-                      a: "✓",
-                      b: "×",
-                    },
-                    {
-                      feature: t("slides.competitiveAdvantage.support247"),
-                      us: "✓",
-                      a: "×",
-                      b: "✓",
-                    },
-                    {
-                      feature: t("slides.competitiveAdvantage.mobileApp"),
-                      us: "✓",
-                      a: "✓",
-                      b: "✓",
-                    },
-                    {
-                      feature: t(
-                        "slides.competitiveAdvantage.aiRecommendations"
-                      ),
-                      us: "✓",
-                      a: "×",
-                      b: "×",
-                    },
-                  ].map((row, i) => (
-                    <tr
-                      key={i}
-                      className={i % 2 === 0 ? "bg-blue-50" : "bg-white"}
-                    >
-                      <td className="p-4 text-blue-700">{row.feature}</td>
-                      <td className="p-4 text-center text-green-600 font-bold">
-                        {row.us}
-                      </td>
-                      <td className="p-4 text-center text-gray-600">{row.a}</td>
-                      <td className="p-4 text-center text-gray-600">{row.b}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    ),
-  },
-  {
-    title: "slides.financialModel.title",
-    subtitle: "slides.financialModel.subtitle",
-    content: (t: (scope: string) => string) => (
-      <div className="space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card className="bg-gradient-to-r from-gray-50 to-blue-50 shadow-md">
-            <CardContent className="p-6">
-              <h3 className="text-2xl font-bold mb-6 text-blue-800">
-                {t("slides.financialModel.revenueProjections")}
-              </h3>
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart
-                  data={[
-                    { year: "2024", revenue: 2, profit: 0.5 },
-                    { year: "2025", revenue: 5, profit: 1.5 },
-                    { year: "2026", revenue: 12, profit: 4 },
-                    { year: "2027", revenue: 25, profit: 9 },
-                  ]}
-                >
-                  <CartesianGrid strokeDasharray="3 3" stroke="#ccc" />
-                  <XAxis dataKey="year" stroke="#4a5568" />
-                  <YAxis
-                    label={{
-                      value: "Millions MAD",
-                      angle: -90,
-                      position: "insideLeft",
-                    }}
-                    stroke="#4a5568"
-                  />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: "#f7fafc",
-                      border: "1px solid #e2e8f0",
-                    }}
-                  />
-                  <Legend />
-                  <Bar
-                    dataKey="revenue"
-                    fill="#4F46E5"
-                    name={t("slides.financialModel.revenue")}
-                  />
-                  <Bar
-                    dataKey="profit"
-                    fill="#10B981"
-                    name={t("slides.financialModel.profit")}
-                  />
-                </BarChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gradient-to-br from-blue-100 to-indigo-100 shadow-md">
-            <CardContent className="p-6">
-              <h3 className="text-2xl font-bold mb-4 text-blue-800">
-                {t("slides.financialModel.keyMetrics")}
-              </h3>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between p-3 bg-white rounded-lg shadow">
-                  <span className="text-blue-700">
-                    {t("slides.financialModel.cac")}
-                  </span>
-                  <span className="font-bold text-blue-800">120 MAD</span>
-                </div>
-                <div className="flex items-center justify-between p-3 bg-white rounded-lg shadow">
-                  <span className="text-blue-700">
-                    {t("slides.financialModel.ltv")}
-                  </span>
-                  <span className="font-bold text-blue-800">1,200 MAD</span>
-                </div>
-                <div className="flex items-center justify-between p-3 bg-white rounded-lg shadow">
-                  <span className="text-blue-700">
-                    {t("slides.financialModel.ltvCacRatio")}
-                  </span>
-                  <span className="font-bold text-green-600">10x</span>
-                </div>
-                <div className="flex items-center justify-between p-3 bg-white rounded-lg shadow">
-                  <span className="text-blue-700">
-                    {t("slides.financialModel.grossMargin")}
-                  </span>
-                  <span className="font-bold text-blue-800">65%</span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        <Card className="bg-gradient-to-r from-gray-50 to-blue-50 shadow-md">
-          <CardContent className="p-6">
-            <h3 className="text-2xl font-bold mb-6 text-blue-800">
-              {t("slides.financialModel.revenueSources")}
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="p-4 bg-blue-100 rounded-lg shadow">
-                <DollarSign className="h-8 w-8 text-blue-600 mb-2" />
-                <h4 className="text-lg font-bold mb-2 text-blue-800">
-                  {t("slides.financialModel.commissions")}
-                </h4>
-                <p className="text-blue-700">
-                  5-15% {t("slides.financialModel.commissionsDescription")}
-                </p>
-                <p className="text-blue-600 font-bold mt-2">
-                  60% {t("slides.financialModel.revenue")}
-                </p>
-              </div>
-              <div className="p-4 bg-green-100 rounded-lg shadow">
-                <Users2 className="h-8 w-8 text-green-600 mb-2" />
-                <h4 className="text-lg font-bold mb-2 text-green-800">
-                  {t("slides.financialModel.proSubscriptions")}
-                </h4>
-                <p className="text-green-700">
-                  {t("slides.financialModel.proSubscriptionsDescription")}
-                </p>
-                <p className="text-green-600 font-bold mt-2">
-                  30% {t("slides.financialModel.revenue")}
-                </p>
-              </div>
-              <div className="p-4 bg-purple-100 rounded-lg shadow">
-                <Rocket className="h-8 w-8 text-purple-600 mb-2" />
-                <h4 className="text-lg font-bold mb-2 text-purple-800">
-                  {t("slides.financialModel.premiumServices")}
-                </h4>
-                <p className="text-purple-700">
-                  {t("slides.financialModel.premiumServicesDescription")}
-                </p>
-                <p className="text-purple-600 font-bold mt-2">
-                  10% {t("slides.financialModel.revenue")}
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    ),
-  },
-  {
-    title: "slides.investmentOpportunity.title",
-    subtitle: "slides.investmentOpportunity.subtitle",
-    content: (t: (scope: string) => string) => (
-      <div className="space-y-8">
-        <div className="bg-gradient-to-r from-blue-100 to-purple-100 p-6 rounded-xl shadow-md">
-          <h2 className="text-3xl font-bold mb-4 text-blue-800">
-            {t("slides.investmentOpportunity.mvpPhase")}
-          </h2>
-          <p className="text-xl text-gray-700 leading-relaxed">
-            {t("slides.investmentOpportunity.mvpDescription")}
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Card className="bg-gradient-to-br from-blue-50 to-blue-100">
             <CardContent className="p-6">
-              <h3 className="text-2xl font-bold mb-6 text-blue-800">
-                {t("slides.investmentOpportunity.mainServices")}
-              </h3>
-              <div className="space-y-4">
-                <div className="flex items-center gap-4 p-3 bg-white rounded-lg shadow">
-                  <Hotel className="h-6 w-6 text-blue-600" />
-                  <div>
-                    <span className="font-bold text-blue-800">
-                      {t("slides.investmentOpportunity.accommodation")}
-                    </span>
-                    <p className="text-sm text-blue-600">
-                      {t(
-                        "slides.investmentOpportunity.accommodationDescription"
-                      )}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 p-3 bg-white rounded-lg shadow">
-                  <Utensils className="h-6 w-6 text-blue-600" />
-                  <div>
-                    <span className="font-bold text-blue-800">
-                      {t("slides.investmentOpportunity.culinaryExperiences")}
-                    </span>
-                    <p className="text-sm text-blue-600">
-                      {t(
-                        "slides.investmentOpportunity.culinaryExperiencesDescription"
-                      )}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 p-3 bg-white rounded-lg shadow">
-                  <Map className="h-6 w-6 text-blue-600" />
-                  <div>
-                    <span className="font-bold text-blue-800">
-                      {t("slides.investmentOpportunity.toursActivities")}
-                    </span>
-                    <p className="text-sm text-blue-600">
-                      {t(
-                        "slides.investmentOpportunity.toursActivitiesDescription"
-                      )}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 p-3 bg-white rounded-lg shadow">
-                  <Sparkles className="h-6 w-6 text-blue-600" />
-                  <div>
-                    <span className="font-bold text-blue-800">
-                      {t("slides.investmentOpportunity.wellness")}
-                    </span>
-                    <p className="text-sm text-blue-600">
-                      {t("slides.investmentOpportunity.wellnessDescription")}
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <h3 className="text-2xl font-bold mb-4 text-blue-800">Vision</h3>
+              <p className="text-blue-700">
+                To simplify and enhance the reservation experience for both
+                consumers and service providers.
+              </p>
             </CardContent>
           </Card>
 
           <Card className="bg-gradient-to-br from-purple-50 to-purple-100">
             <CardContent className="p-6">
-              <h3 className="text-2xl font-bold mb-6 text-purple-800">
-                {t("slides.investmentOpportunity.revenueModel")}
+              <h3 className="text-2xl font-bold mb-4 text-purple-800">
+                Mission
               </h3>
-              <div className="space-y-4">
-                <div className="flex items-center gap-4 p-3 bg-white rounded-lg shadow">
-                  <DollarSign className="h-6 w-6 text-purple-600" />
-                  <div>
-                    <span className="font-bold text-purple-800">
-                      {t("slides.investmentOpportunity.commissions")}
-                    </span>
-                    <p className="text-sm text-purple-600">
-                      {t("slides.investmentOpportunity.commissionsDescription")}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 p-3 bg-white rounded-lg shadow">
-                  <Trophy className="h-6 w-6 text-purple-600" />
-                  <div>
-                    <span className="font-bold text-purple-800">
-                      {t("slides.investmentOpportunity.premiumSubscriptions")}
-                    </span>
-                    <p className="text-sm text-purple-600">
-                      {t(
-                        "slides.investmentOpportunity.premiumSubscriptionsDescription"
-                      )}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 p-3 bg-white rounded-lg shadow">
-                  <Target className="h-6 w-6 text-purple-600" />
-                  <div>
-                    <span className="font-bold text-purple-800">
-                      {t("slides.investmentOpportunity.promotionalTools")}
-                    </span>
-                    <p className="text-sm text-purple-600">
-                      {t(
-                        "slides.investmentOpportunity.promotionalToolsDescription"
-                      )}
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <p className="text-purple-700">
+                Creating a seamless, AI-powered platform that connects users
+                with services they love.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-indigo-50 to-indigo-100">
+            <CardContent className="p-6">
+              <h3 className="text-2xl font-bold mb-4 text-indigo-800">
+                Impact
+              </h3>
+              <p className="text-indigo-700">
+                Transforming the fragmented booking landscape into an efficient,
+                user-centric ecosystem.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: "problem",
+    title: "The Problem",
+    subtitle: "Current Market Challenges",
+    content: () => (
+      <div className="space-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Card className="bg-gradient-to-br from-red-50 to-red-100">
+            <CardContent className="p-6">
+              <h3 className="text-xl font-bold mb-4 text-red-800">
+                Fragmented Systems
+              </h3>
+              <p className="text-red-700">
+                Users struggle with multiple platforms for different services,
+                leading to inefficient booking processes.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-orange-50 to-orange-100">
+            <CardContent className="p-6">
+              <h3 className="text-xl font-bold mb-4 text-orange-800">
+                User Frustration
+              </h3>
+              <p className="text-orange-700">
+                Time-consuming comparison and booking processes across different
+                platforms.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-amber-50 to-amber-100">
+            <CardContent className="p-6">
+              <h3 className="text-xl font-bold mb-4 text-amber-800">
+                Business Limitations
+              </h3>
+              <p className="text-amber-700">
+                SMEs face challenges with limited digital presence and
+                operational inefficiencies.
+              </p>
             </CardContent>
           </Card>
         </div>
 
-        <Card className="bg-gradient-to-r from-green-50 to-blue-50">
+        <Card className="bg-gradient-to-r from-gray-50 to-blue-50">
           <CardContent className="p-6">
             <h3 className="text-2xl font-bold mb-6 text-blue-800">
-              {t("slides.investmentOpportunity.investmentNeeds")}
+              Market Impact (in %)
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="p-4 bg-white rounded-lg shadow">
-                <Rocket className="h-8 w-8 text-blue-600 mb-2" />
-                <h4 className="text-lg font-bold mb-2 text-blue-800">
-                  {t("slides.investmentOpportunity.techDevelopment")}
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart
+                data={[
+                  { category: "Lost Revenue", value: 40 },
+                  { category: "Customer Dissatisfaction", value: 55 },
+                  { category: "Operational Inefficiency", value: 45 },
+                  { category: "Market Fragmentation", value: 60 },
+                ]}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="category" />
+                <YAxis />
+                <Tooltip />
+                <Bar dataKey="value" fill="#4F46E5" />
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+      </div>
+    ),
+  },
+  {
+    id: "solution",
+    title: "The Solution",
+    subtitle: "Introducing ReserNova Platform",
+    content: () => (
+      <div className="space-y-8">
+        <Card className="bg-gradient-to-r from-green-50 to-emerald-100">
+          <CardContent className="p-6">
+            <h3 className="text-2xl font-bold mb-4 text-emerald-800">
+              Centralized Platform
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="text-xl font-semibold mb-3 text-emerald-700">
+                  Key Sectors
                 </h4>
-                <ul className="text-blue-700 space-y-1 text-sm">
-                  <li>
-                    • {t("slides.investmentOpportunity.techDevelopment1")}
-                  </li>
-                  <li>
-                    • {t("slides.investmentOpportunity.techDevelopment2")}
-                  </li>
-                  <li>
-                    • {t("slides.investmentOpportunity.techDevelopment3")}
-                  </li>
+                <ul className="space-y-2 text-emerald-600">
+                  <li>• Accommodation</li>
+                  <li>• Culinary Experiences</li>
+                  <li>• Entertainment</li>
+                  <li>• Wellness</li>
                 </ul>
               </div>
-              <div className="p-4 bg-white rounded-lg shadow">
-                <Users2 className="h-8 w-8 text-green-600 mb-2" />
-                <h4 className="text-lg font-bold mb-2 text-green-800">
-                  {t("slides.investmentOpportunity.commercialExpansion")}
+              <div>
+                <h4 className="text-xl font-semibold mb-3 text-emerald-700">
+                  Features
                 </h4>
-                <ul className="text-green-700 space-y-1 text-sm">
-                  <li>
-                    • {t("slides.investmentOpportunity.commercialExpansion1")}
-                  </li>
-                  <li>
-                    • {t("slides.investmentOpportunity.commercialExpansion2")}
-                  </li>
-                  <li>
-                    • {t("slides.investmentOpportunity.commercialExpansion3")}
-                  </li>
+                <ul className="space-y-2 text-emerald-600">
+                  <li>• AI-Powered Recommendations</li>
+                  <li>• Real-time Availability</li>
+                  <li>• Secure Payments</li>
+                  <li>• Smart Analytics</li>
                 </ul>
               </div>
-              <div className="p-4 bg-white rounded-lg shadow">
-                <Target className="h-8 w-8 text-purple-600 mb-2" />
-                <h4 className="text-lg font-bold mb-2 text-purple-800">
-                  {t("slides.investmentOpportunity.marketingAcquisition")}
+            </div>
+          </CardContent>
+        </Card>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Card className="bg-gradient-to-br from-blue-50 to-cyan-100">
+            <CardContent className="p-6">
+              <h3 className="text-xl font-bold mb-4 text-cyan-800">
+                AI Integration
+              </h3>
+              <p className="text-cyan-700 mb-4">
+                Advanced AI-powered features including voice assistants,
+                chatbots, and predictive analytics for enhanced user experience.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-purple-50 to-violet-100">
+            <CardContent className="p-6">
+              <h3 className="text-xl font-bold mb-4 text-violet-800">
+                User Interface
+              </h3>
+              <p className="text-violet-700 mb-4">
+                Intuitive design optimized for both service providers and
+                consumers, ensuring maximum accessibility and ease of use.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: "market",
+    title: "Market Opportunity",
+    subtitle: "Global & Regional Insights",
+    content: () => (
+      <div className="space-y-8">
+        <Card className="bg-gradient-to-r from-blue-50 to-indigo-100">
+          <CardContent className="p-6">
+            <h3 className="text-2xl font-bold mb-6 text-indigo-800">
+              Global Market Distribution
+            </h3>
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={[
+                    { name: "Accommodation", value: 57 },
+                    { name: "Culinary", value: 24 },
+                    { name: "Entertainment & Wellness", value: 19 },
+                  ]}
+                  dataKey="value"
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={100}
+                  label
+                >
+                  <Cell fill="#4F46E5" />
+                  <Cell fill="#7C3AED" />
+                  <Cell fill="#2563EB" />
+                </Pie>
+                <Tooltip />
+              </PieChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Card className="bg-gradient-to-br from-emerald-50 to-green-100">
+            <CardContent className="p-6">
+              <h3 className="text-xl font-bold mb-4 text-emerald-800">
+                Market Size
+              </h3>
+              <p className="text-emerald-700 mb-2">Global: $1.2T (2023)</p>
+              <p className="text-emerald-700 mb-2">Africa: $12.6B</p>
+              <p className="text-emerald-700">Morocco: $1.1B</p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-blue-50 to-indigo-100">
+            <CardContent className="p-6">
+              <h3 className="text-xl font-bold mb-4 text-indigo-800">
+                Growth Drivers
+              </h3>
+              <ul className="space-y-2 text-indigo-700">
+                <li>• Rising middle-class spending</li>
+                <li>• Tourism recovery</li>
+                <li>• Increased smartphone adoption</li>
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: "product",
+    title: "Product & Technical Aspects",
+    subtitle: "Key Features & User Experience",
+    content: () => (
+      <div className="space-y-8">
+        {" "}
+        <Card className="bg-gradient-to-r from-indigo-50 to-blue-100">
+          {" "}
+          <CardContent className="p-6">
+            {" "}
+            <h3 className="text-2xl font-bold mb-4 text-blue-800">
+              {" "}
+              Platform Features{" "}
+            </h3>{" "}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {" "}
+              <Card className="shadow-md">
+                {" "}
+                <CardContent className="p-4">
+                  {" "}
+                  <h4 className="text-lg font-semibold mb-2 text-indigo-700">
+                    {" "}
+                    User Experience{" "}
+                  </h4>{" "}
+                  <ul className="space-y-2 text-gray-600">
+                    {" "}
+                    <li>• Intuitive booking with just a few taps</li>{" "}
+                    <li>• Personalized recommendations powered by AI</li>{" "}
+                    <li>• Real-time availability and booking updates</li>{" "}
+                    <li>• Secure and seamless payment processing</li>{" "}
+                  </ul>{" "}
+                </CardContent>{" "}
+              </Card>{" "}
+              <Card className="shadow-md">
+                {" "}
+                <CardContent className="p-4">
+                  {" "}
+                  <h4 className="text-lg font-semibold mb-2 text-indigo-700">
+                    {" "}
+                    Provider Dashboard{" "}
+                  </h4>{" "}
+                  <ul className="space-y-2 text-gray-600">
+                    {" "}
+                    <li>• Seamless reservation management system</li>{" "}
+                    <li>• AI-driven insights and dynamic scheduling options</li>{" "}
+                    <li>
+                      • Real-time data analytics for better decision-making
+                    </li>{" "}
+                    <li>
+                      • AI-powered pricing optimization based on demand trends
+                    </li>{" "}
+                  </ul>{" "}
+                </CardContent>{" "}
+              </Card>{" "}
+            </div>{" "}
+          </CardContent>{" "}
+        </Card>{" "}
+        <Card className="bg-gradient-to-r from-purple-50 to-violet-100">
+          {" "}
+          <CardContent className="p-6">
+            {" "}
+            <h3 className="text-2xl font-bold mb-4 text-violet-800">
+              {" "}
+              Technical Aspects{" "}
+            </h3>{" "}
+            <div className="space-y-4 text-gray-600">
+              {" "}
+              <p>
+                • ReserNova is a cross-platform solution that operates
+                seamlessly across iOS, Android, and web browsers, providing a
+                consistent experience to users everywhere.
+              </p>{" "}
+              <p>
+                • It integrates cutting-edge AI technologies to personalize
+                recommendations, drive operational efficiencies, and provide
+                predictive analytics for service providers.
+              </p>{" "}
+              <p>
+                • The platform leverages cloud-based infrastructure, ensuring
+                scalability, security, and high availability across all
+                platforms.
+              </p>{" "}
+              <p>
+                • The intuitive slot management system allows service providers
+                to avoid overlapping schedules and improve user experience by
+                ensuring real-time availability control.
+              </p>{" "}
+            </div>{" "}
+          </CardContent>{" "}
+        </Card>{" "}
+      </div>
+    ),
+  },
+  {
+    id: "business",
+    title: "Business Model",
+    subtitle: "Revenue Streams & Pricing",
+    content: () => (
+      <div className="space-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Card className="bg-gradient-to-br from-green-50 to-emerald-100">
+            <CardContent className="p-6">
+              <h3 className="text-xl font-bold mb-4 text-emerald-800">
+                Commission Model
+              </h3>
+              <p className="text-emerald-700 mb-4">
+                Competitive 5-10% commission on each booking, ensuring
+                affordability for service providers while maintaining
+                profitability.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-blue-50 to-indigo-100">
+            <CardContent className="p-6">
+              <h3 className="text-xl font-bold mb-4 text-indigo-800">
+                Premium Services
+              </h3>
+              <p className="text-indigo-700 mb-4">
+                Subscription-based premium features offering enhanced analytics,
+                visibility, and priority support for businesses.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        <Card className="bg-gradient-to-r from-purple-50 to-violet-100">
+          <CardContent className="p-6">
+            <h3 className="text-2xl font-bold mb-6 text-violet-800">
+              Revenue Projection (in Dhs)
+            </h3>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart
+                data={[
+                  {
+                    period: "Q4 2025",
+                    commission: 300000,
+                    subscription: 50000,
+                  },
+                  {
+                    period: "Q4 2026",
+                    commission: 1000000,
+                    subscription: 200000,
+                  },
+                  {
+                    period: "Q4 2027",
+                    commission: 2000000,
+                    subscription: 500000,
+                  },
+                ]}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="period" />
+                <YAxis />
+                <Tooltip formatter={(value) => `${value} Dhs`} />
+                <Bar
+                  dataKey="commission"
+                  name="Commission Revenue"
+                  fill="#7C3AED"
+                />
+                <Bar
+                  dataKey="subscription"
+                  name="Subscription Revenue"
+                  fill="#4F46E5"
+                />
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+      </div>
+    ),
+  },
+  {
+    id: "competition",
+    title: "Competitive Landscape",
+    subtitle: "Market Analysis & Advantages",
+    content: () => (
+      <div className="space-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Card className="bg-gradient-to-br from-orange-50 to-amber-100">
+            <CardContent className="p-6">
+              <h3 className="text-xl font-bold mb-4 text-amber-800">
+                Global Competitors
+              </h3>
+              <ul className="space-y-2 text-amber-700">
+                <li>• Fresha (Beauty/Wellness)</li>
+                <li>• OpenTable (Restaurants)</li>
+                <li>• Booking.com (Accommodation)</li>
+                <li>• Ticketmaster (Entertainment)</li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-red-50 to-rose-100">
+            <CardContent className="p-6">
+              <h3 className="text-xl font-bold mb-4 text-rose-800">
+                Local Players
+              </h3>
+              <ul className="space-y-2 text-rose-700">
+                <li>• Hmizate (Deals platform)</li>
+                <li>• Local booking solutions</li>
+                <li>• Fragmented service providers</li>
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
+
+        <Card className="bg-gradient-to-r from-blue-50 to-indigo-100">
+          <CardContent className="p-6">
+            <h3 className="text-2xl font-bold mb-4 text-indigo-800">
+              ReserNova&apos;s Advantages
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="bg-white p-4 rounded-lg shadow-md">
+                <h4 className="font-semibold text-lg mb-2 text-indigo-700">
+                  Multi-Sector Integration
                 </h4>
-                <ul className="text-purple-700 space-y-1 text-sm">
-                  <li>
-                    • {t("slides.investmentOpportunity.marketingAcquisition1")}
-                  </li>
-                  <li>
-                    • {t("slides.investmentOpportunity.marketingAcquisition2")}
-                  </li>
-                  <li>
-                    • {t("slides.investmentOpportunity.marketingAcquisition3")}
-                  </li>
-                </ul>
+                <p className="text-gray-600">
+                  Unified platform across various service types
+                </p>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-md">
+                <h4 className="font-semibold text-lg mb-2 text-indigo-700">
+                  AI-Powered Features
+                </h4>
+                <p className="text-gray-600">
+                  Smart recommendations and predictive analytics
+                </p>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-md">
+                <h4 className="font-semibold text-lg mb-2 text-indigo-700">
+                  Global Scalability
+                </h4>
+                <p className="text-gray-600">
+                  Designed for expansion beyond local markets
+                </p>
               </div>
             </div>
           </CardContent>
@@ -874,11 +520,246 @@ const slides = [
       </div>
     ),
   },
+  {
+    id: "traction",
+    title: "Go-To-Market & Traction",
+    subtitle: "Launch Strategy & Milestones",
+    content: () => (
+      <div className="space-y-8">
+        <Card className="bg-gradient-to-r from-emerald-50 to-green-100">
+          <CardContent className="p-6">
+            <h3 className="text-2xl font-bold mb-4 text-emerald-800">
+              Launch Strategy
+            </h3>
+            <div className="flex flex-col md:flex-row gap-6">
+              <div className="bg-white p-4 rounded-lg shadow-md flex-1">
+                <h4 className="font-semibold text-lg mb-2 text-emerald-700">
+                  Phase 1: Morocco Launch
+                </h4>
+                <p className="text-gray-600 mb-3">
+                  Initial rollout in Morocco targeting key sectors and cities (
+                  Casablanca, Marrakech, Rabat, Tangier )
+                </p>
+                <p className="text-gray-500">Q4 2025</p>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-md flex-1">
+                <h4 className="font-semibold text-lg mb-2 text-emerald-700">
+                  Phase 2: Morocco Expansion
+                </h4>
+                <p className="text-gray-600 mb-3">
+                  Expansion to other Cities and Sectors
+                </p>
+                <p className="text-gray-500">Q3 2026</p>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-md flex-1">
+                <h4 className="font-semibold text-lg mb-2 text-emerald-700">
+                  Phase 3: Africa
+                </h4>
+                <p className="text-gray-600 mb-3">
+                  Expansion to other African countries with similar market
+                  dynamics
+                </p>
+                {/* <p className="text-gray-500">&amp; Beyond</p> */}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-gradient-to-r from-blue-50 to-indigo-100">
+          <CardContent className="p-6">
+            <h3 className="text-2xl font-bold mb-6 text-indigo-800">
+              Key Milestones
+            </h3>
+            <div className="space-y-4">
+              <div className="flex items-center">
+                <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold text-lg">
+                  ✓
+                </div>
+                <div className="ml-4">
+                  <h4 className="font-semibold text-lg text-indigo-700">
+                    MVP Development
+                  </h4>
+                  <p className="text-gray-600">
+                    Complete and test the Minimum Viable Product
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center">
+                <div className="w-8 h-8 rounded-full bg-indigo-200 flex items-center justify-center text-indigo-800 font-bold text-lg">
+                  2
+                </div>
+                <div className="ml-4">
+                  <h4 className="font-semibold text-lg text-indigo-700">
+                    Pilot Testing
+                  </h4>
+                  <p className="text-gray-600">
+                    Conduct pilot programs with select service providers
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center">
+                <div className="w-8 h-8 rounded-full bg-indigo-200 flex items-center justify-center text-indigo-800 font-bold text-lg">
+                  3
+                </div>
+                <div className="ml-4">
+                  <h4 className="font-semibold text-lg text-indigo-700">
+                    User Acquisition
+                  </h4>
+                  <p className="text-gray-600">
+                    Implement marketing campaigns to drive adoption
+                  </p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    ),
+  },
+  {
+    id: "team",
+    title: "The Team",
+    subtitle: "Our Leadership & Expertise",
+    content: () => (
+      <div className="space-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Card className="bg-gradient-to-br from-blue-50 to-indigo-100">
+            <CardContent className="p-6 text-center">
+              <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-indigo-200 flex items-center justify-center">
+                <span className="text-2xl font-bold text-indigo-800">AD</span>
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-indigo-800">
+                Abderrahmane Daifi
+              </h3>
+              <p className="text-indigo-600">Co-Founder & CEO</p>
+              <p className="text-indigo-600 mt-2 text-sm">
+                Full-Stack Developer & DevOps Engineer with expertise in IT
+                architecture, AI integration, and automation.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-purple-50 to-violet-100">
+            <CardContent className="p-6 text-center">
+              <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-violet-200 flex items-center justify-center">
+                <span className="text-2xl font-bold text-violet-800">YE</span>
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-violet-800">
+                Younes El GUERRAOUI
+              </h3>
+              <p className="text-violet-600">Co-Founder & CTO</p>
+              <p className="text-violet-600 mt-2 text-sm">
+                Senior Web Developer specializing in React, Node.js, and
+                Nest.js, with extensive experience in backend infrastructure and
+                cloud solutions.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        <Card className="bg-gradient-to-r from-gray-50 to-blue-50">
+          <CardContent className="p-6">
+            <h3 className="text-2xl font-bold mb-4 text-blue-800">
+              Who We Need to Join Us
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="bg-white p-4 rounded-lg shadow-md">
+                <h4 className="font-semibold text-lg mb-2 text-blue-700">
+                  Operations Lead
+                </h4>
+                <p className="text-gray-600">
+                  Seeking an expert in operations to streamline workflows,
+                  enhance efficiency, and support scalable growth.
+                </p>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-md">
+                <h4 className="font-semibold text-lg mb-2 text-blue-700">
+                  Marketing Specialist
+                </h4>
+                <p className="text-gray-600">
+                  Looking for a creative marketer experienced in digital
+                  advertising, social media, and brand strategy to drive user
+                  acquisition and engagement.
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    ),
+  },
+  {
+    id: "funding",
+    title: "The Ask",
+    subtitle: "Funding Requirements & Allocation",
+    content: () => (
+      <div className="space-y-8">
+        <Card className="bg-gradient-to-r from-indigo-50 to-purple-100">
+          <CardContent className="p-6">
+            <h3 className="text-2xl font-bold mb-6 text-purple-800">
+              Funding Requirements
+            </h3>
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={[
+                    { name: "Product Development", value: 40 },
+                    { name: "Marketing", value: 25 },
+                    { name: "Operations", value: 20 },
+                    { name: "Team Expansion", value: 15 },
+                  ]}
+                  dataKey="value"
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={100}
+                  label
+                >
+                  <Cell fill="#4F46E5" />
+                  <Cell fill="#7C3AED" />
+                  <Cell fill="#2563EB" />
+                  <Cell fill="#8B5CF6" />
+                </Pie>
+                <Tooltip formatter={(value) => `${value}%`} />
+              </PieChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Card className="bg-gradient-to-br from-blue-50 to-indigo-100">
+            <CardContent className="p-6">
+              <h3 className="text-xl font-bold mb-4 text-indigo-800">
+                Utilization of Funds
+              </h3>
+              <ul className="space-y-2 text-indigo-700">
+                <li>• Accelerate MVP development</li>
+                <li>• Conduct comprehensive market research</li>
+                <li>• Implement customer acquisition initiatives</li>
+                <li>• Expand the team strategically</li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-emerald-50 to-green-100">
+            <CardContent className="p-6">
+              <h3 className="text-xl font-bold mb-4 text-emerald-800">
+                Long-Term Vision
+              </h3>
+              <p className="text-emerald-700">
+                Our goal is to revolutionize the fragmented service reservation
+                market globally, delivering value for both consumers and service
+                providers through our seamless, AI-driven platform.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    ),
+  },
 ];
 
-const PitchDeck = () => {
-  const t = useTranslations("");
-
+export default function PitchDeck() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -886,27 +767,28 @@ const PitchDeck = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-purple-50 to-pink-50 p-4 sm:p-8 ">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-purple-50 to-pink-50 p-4 sm:p-8">
       <div className="max-w-7xl mx-auto">
-        <nav className="flex justify-center space-x-2 sm:space-x-4 mb-8 flex-wrap">
-          {slides.map((slide: slider, index: number) => (
+        <nav className="flex justify-center space-x-4 mb-8 flex-wrap">
+          {slides.map((slide, index) => (
             <Button
-              key={index}
+              key={slide.id}
               onClick={() => setCurrentSlide(index)}
               variant={currentSlide === index ? "default" : "outline"}
-              className="text-sm sm:text-base mb-2"
+              className="mb-2"
             >
-              {t(slide.title)}
+              {slide.title}
             </Button>
           ))}
         </nav>
+
         <Card className="overflow-hidden bg-white shadow-xl">
           <CardHeader className="bg-gradient-to-r from-blue-600 to-purple-600">
-            <CardTitle className="text-3xl sm:text-4xl text-white">
-              {t(slides[currentSlide].title)}
+            <CardTitle className="text-4xl text-white">
+              {slides[currentSlide].title}
             </CardTitle>
-            <p className="text-xl sm:text-2xl text-blue-100 mt-2">
-              {t(slides[currentSlide].subtitle)}
+            <p className="text-2xl text-blue-100 mt-2">
+              {slides[currentSlide].subtitle}
             </p>
           </CardHeader>
           <CardContent className="p-6">
@@ -918,35 +800,34 @@ const PitchDeck = () => {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5 }}
               >
-                {slides[currentSlide].content(t)}
+                {slides[currentSlide].content()}
               </motion.div>
             </AnimatePresence>
           </CardContent>
         </Card>
+
         <div className="flex justify-between items-center mt-8">
           <Button
             onClick={prevSlide}
             disabled={currentSlide === 0}
             variant="outline"
-            className="flex items-center gap-2 bg-blue-100 text-blue-700 hover:bg-blue-200"
+            className="flex items-center gap-2"
           >
-            <ChevronLeft className="h-4 w-4" /> {t("pitchDeck.previous")}
+            <ChevronLeft className="h-4 w-4" /> Previous
           </Button>
-          <span className="text-sm sm:text-base text-gray-500">
-            {currentSlide + 1} {t("pitchDeck.of")} {slides.length}
+          <span className="text-gray-500">
+            {currentSlide + 1} of {slides.length}
           </span>
           <Button
             onClick={nextSlide}
             disabled={currentSlide === slides.length - 1}
             variant="outline"
-            className="flex items-center gap-2 bg-blue-100 text-blue-700 hover:bg-blue-200"
+            className="flex items-center gap-2"
           >
-            {t("pitchDeck.next")} <ChevronRight className="h-4 w-4" />
+            Next <ChevronRight className="h-4 w-4" />
           </Button>
         </div>
       </div>
     </div>
   );
-};
-
-export default PitchDeck;
+}
